@@ -1,0 +1,42 @@
+<launch>
+  <arg name="debug_mode" default="false"/>
+  <arg name="force_controller_name" default="downward_force_controller"/>
+  <arg name="grip_strength" default="0.15"/>
+  <arg name="live_robot" default="true"/>
+  <arg name="load_gripper" default="false"/>
+  <arg name="robot_ip" default="franka_robot"/>
+  <arg name="serial_port" default="/dev/ttyACM0"/>
+  <arg name="force_control_desired_mass" default="0.8"/>
+  <arg name="force_control_kp" default="1.0"/>
+  <arg name="force_control_ki" default="2.0"/>
+  <arg name="force_control_kd" default="0.0"/>
+  
+  <include file="$(find softgrasp_ros)/launch/arm_control_interface.launch" if="$(arg live_robot)">
+    <arg name="robot_ip" value="$(arg robot_ip)"/>
+    <arg name="load_gripper" value="$(arg load_gripper)"/>
+  </include>
+  <include file="$(find softgrasp_ros)/launch/hand_control_interface.launch" if="$(arg live_robot)">
+    <arg name="serial_port" value="$(arg serial_port)"/>
+  </include>
+
+  <node name="perception_server" type="perception_server" pkg="softgrasp_ros" output="screen" required="true" unless="$(arg debug_mode)">
+    <param name="debug_mode" value="$(arg debug_mode)"/>
+  </node>
+
+  <node name="force_control_grasper" type="force_control_grasp" pkg="softgrasp_ros" output="screen" required="true">
+    <param name="live_robot" value="$(arg live_robot)"/>
+    <param name="grip_strength" value="$(arg grip_strength)"/>
+    <param name="force_control/controller_name" value="$(arg force_controller_name)"/>
+    <param name="force_control/desired_mass" value="$(arg force_control_desired_mass)"/>
+    <param name="force_control/kp" value="$(arg force_control_kp)"/>
+    <param name="force_control/ki" value="$(arg force_control_ki)"/>
+    <param name="force_control/kd" value="$(arg force_control_kd)"/>
+  </node>
+  <include file="/home/sbrahmbh/research/softgrasp_perception/softgrasp_perception/data/camera_pose.launch"/>
+  <include file="/home/sbrahmbh/research/softgrasp_perception/softgrasp_perception/data/camera_intrinsics.launch"/>
+  
+  <node name="rviz" pkg="rviz" type="rviz" output="screen" required="true" args="-d $(find softgrasp_ros)/rviz/moveit.rviz" if="$(arg live_robot)">
+    <rosparam command="load" file="$(find panda_moveit_config)/config/kinematics.yaml"/>
+  </node>
+  <node name="rqt_console" type="rqt_console" pkg="rqt_console" output="screen" required="true"/>
+</launch>

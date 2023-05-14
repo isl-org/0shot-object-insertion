@@ -1,0 +1,50 @@
+<launch>
+  <!-- slotidx<1|2|3|$|5|6>_trialidx<1|2|3|4> -->
+  <arg name="n"/>
+  <!-- The rpy in the comment uses the extrinsic XYZ convention, which is the same as is used in a URDF. See
+       http://wiki.ros.org/geometry2/RotationMethods and https://en.wikipedia.org/wiki/Euler_angles for more info. -->
+  <!-- xyz="-0.0120971 -0.379168 0.481674" rpy="2.96992 2.3232 -2.89396" -->
+  <!--node pkg="tf2_ros" type="static_transform_publisher" name="camera_link_broadcaster"
+      args="-0.0120971 -0.379168 0.481674   -0.0290941 0.403086 0.0790378 0.911278 panda_link0 camera_link" /-->
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTw"
+      args="0.257771 0.0902224 0.758013  0.569318 0.743982 -0.320217 0.140814 camera_color_optical_frame world_table" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="wTb"
+      args="0.461 -0.489 0.011 3.130 -0.000 0.017 world_table panda_link0" />
+  
+  <node pkg="tf2_ros" type="static_transform_publisher" name="bTgrasp"
+      args="0.628 -0.348 0.555  0.679 -0.054 0.086 0.727 panda_link0 grasp" />
+  
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '1_1')"
+      args="-0.353863 -0.168872 0.666551  -0.308495 -0.154127 -0.565871 0.74891 camera_color_optical_frame goal" />
+
+
+    
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '2_1')"
+      args="-0.308023 -0.160913 0.650018  -0.279278 -0.199215 -0.578624 0.73994 camera_color_optical_frame goal" />
+
+
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '3_1')"
+      args="-0.278462 -0.159036 0.639551  -0.26994 -0.218371 -0.571145 0.743801 camera_color_optical_frame goal" />
+
+
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '4_1')"
+      args="-0.233811 -0.154542 0.628894  -0.270466 -0.20177 -0.589947 0.733553 camera_color_optical_frame goal" />
+
+
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '5_1')"
+      args="-0.195202 -0.143843 0.610341  -0.299119 -0.16125 -0.563707 0.752835 camera_color_optical_frame goal" />
+
+
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '6_1')"
+      args="-0.164823 -0.141643 0.604648  -0.299534 -0.195238 -0.58271 0.729802 camera_color_optical_frame goal" />
+
+  <!-- debug/-->
+  <!--node pkg="tf2_ros" type="static_transform_publisher" name="bTg"
+      args="0.364 -0.083 0.436 0.999 -0.030 0.034 -0.005 panda_link0 goal" /-->
+</launch>

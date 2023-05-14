@@ -1,0 +1,6 @@
+#!/usr/bin/env python3
+from point_tracker_policy import CirclePolicyActionServer
+
+if __name__ == '__main__':
+  pas = CirclePolicyActionServer()
+  pas.run()

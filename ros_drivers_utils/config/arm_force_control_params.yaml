@@ -1,0 +1,5 @@
+force_control:
+  controller_name: downward_force_controller
+  kp: 1.0
+  ki: 2.0
+  kd: 0.0

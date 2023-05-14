@@ -1,0 +1,5 @@
+float32 opening_amount
+float32 grip_strength
+---
+bool success
+string message

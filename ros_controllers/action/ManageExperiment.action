@@ -1,0 +1,13 @@
+# goal
+# 0: move to goal vicinity
+# 1: execute policy
+# 2: wait 2 s -> release grasp, stop policy controller 
+uint32 stage_id
+---
+
+# result
+bool ok
+---
+
+# feedback
+float32 percent_complete

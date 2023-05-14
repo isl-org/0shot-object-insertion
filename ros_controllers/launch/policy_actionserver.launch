@@ -1,0 +1,16 @@
+<launch>
+  <arg name="policy_name"/>
+  <arg name="exp_dir"/>
+  <arg name="ckpt_dirname"/>
+  
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>
+  
+  <node name="tf2_web_republisher" type="tf2_web_republisher" pkg="tf2_web_republisher" output="screen"
+    required="true"/>
+  
+  <node name="policy_actionserver" pkg="softgrasp_ros_controllers" type="$(arg policy_name)_policy_actionserver"
+      output="screen" required="true">
+    <param name="exp_dir" value="$(arg exp_dir)"/>
+    <param name="ckpt_dirname" value="$(arg ckpt_dirname)"/>
+  </node>
+</launch>

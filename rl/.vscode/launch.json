@@ -1,0 +1,170 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "circle_environment",
+      "type": "python",
+      "request": "launch",
+      "program": "circle_environment.py",
+      "console": "integratedTerminal",
+    },
+    {
+      "name": "contact_insert_environment",
+      "type": "python",
+      "request": "launch",
+      "program": "envs/contact_insert_environment.py",
+      "console": "integratedTerminal",
+      "args": [
+        "--no_render",
+        "--config", "${input:config}",
+      ]
+    },
+    {
+      "name": "plot_dishwasher_environment",
+      "type": "python",
+      "request": "launch",
+      "program": "plot_dishwasher_env.py",
+      "console": "integratedTerminal",
+    },
+    {
+      "name": "plot_resource_usage",
+      "type": "python",
+      "request": "launch",
+      "program": "tfagents_system/utils/plot_resource_usage.py",
+      "console": "integratedTerminal",
+      "args": [
+        "--exp_dir", "${input:exp_dir}"
+      ]
+    },
+    {
+      "name": "plot_graphs",
+      "type": "python",
+      "request": "launch",
+      "program": "plot_graphs.py",
+      "console": "integratedTerminal",
+      "args": [
+        "--config", "config/plot_ablation.yaml"
+      ]
+    },
+    {
+      "name": "run",
+      "type": "python",
+      "request": "launch",
+      "program": "tfagents_system/run.py",
+      "console": "integratedTerminal",
+      "args": [
+        // "--no_graphics",
+        // "--plot_debug_info",
+        "--config", "config/eval.json",
+        "--exp_dir", "${input:exp_dir}",
+        "--checkpoint", "${input:checkpoint}"
+      ]
+    },
+    {
+      "name": "run_circle",
+      "type": "python",
+      "request": "launch",
+      "program": "tfagents_system/run_circle.py",
+      "console": "integratedTerminal",
+      "args": [
+        // "--no_graphics",
+        // "--plot_debug_info",
+        "--config", "config/circle.json",
+      ]
+    },
+    {
+      "name": "sac_collect",
+      "type": "python",
+      "request": "launch",
+      "program": "tfagents_system/sac_collect.py",
+      "console": "integratedTerminal",
+      "args": [
+        "--output", "logs/develop",
+        "--reverb_port", "8008",
+        "--init_replay_buffer",
+      ],
+      "env": {
+        "SAC_NUM_COLLECT_WORKERS": "1",
+        "OMP_NUM_THREADS": "2",
+        "SLURM_PROCID": "0",
+      }
+    },
+    {
+      "name": "sac_train",
+      "type": "python",
+      "request": "launch",
+      "program": "tfagents_system/sac_train.py",
+      "console": "integratedTerminal",
+      "args": [
+        "--config", "${input:config}",
+        "--output", "logs/develop",
+        "--params", "tfagents_system/contact_insert_params.py",
+        "--reverb_port", "8008",
+      ],
+      "env": {
+        "SAC_NUM_COLLECT_WORKERS": "1",
+        "OMP_NUM_THREADS": "4"
+      }
+    },
+    {
+      "name": "sac_replay_buffer",
+      "type": "python",
+      "request": "launch",
+      "program": "tfagents_system/sac_replay_buffer.py",
+      "console": "integratedTerminal",
+      "args": [
+        "--output", "logs/develop",
+        "--reverb_port", "8008",
+      ],
+      "env": {
+        "SAC_NUM_COLLECT_WORKERS": "1",
+      }
+    },
+    {
+      "name": "save_start_joints",
+      "type": "python",
+      "request": "launch",
+      "program": "save_start_joints.py",
+      "console": "integratedTerminal",
+    },
+    {
+      "name": "teleop",
+      "type": "python",
+      "request": "launch",
+      "program": "teleop.py",
+      "console": "integratedTerminal",
+    },
+  ],
+
+  "inputs": [
+    {
+      "id": "config",
+      "default": "config/contact_insert.json",
+      "description": "Configuration File",
+      "type": "promptString",
+    },
+    {
+      "id": "exp_dir",
+      "default": "logs/exp_095",
+      "description": "Experiment dir",
+      "type": "promptString",
+    },
+    {
+      "id": "checkpoint",
+      "default": "policy_checkpoint_0003200000",
+      "description": "policy weights directory in logs/exp/policies/checkpoints",
+      "type": "promptString",
+    }
+  ],
+
+  "compounds": [
+    {
+      "name": "train",
+      "configurations": ["sac_train", "sac_collect", "sac_replay_buffer"],
+      "preLaunchTask": "create_output_dir",
+    },
+  ]
+}

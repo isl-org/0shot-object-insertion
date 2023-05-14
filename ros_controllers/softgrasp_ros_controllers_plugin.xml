@@ -1,0 +1,12 @@
+<library path="lib/libsoftgrasp_ros_controllers">
+  <class name="softgrasp_ros_controllers/DownwardForceController" type="softgrasp_ros_controllers::DownwardForceController" base_class_type="controller_interface::ControllerBase">
+    <description>
+      A controller that applies downward force at the end effector.
+    </description>
+  </class>
+  <class name="softgrasp_ros_controllers/TFPolicyController" type="softgrasp_ros_controllers::TFPolicyController" base_class_type="controller_interface::ControllerBase">
+    <description>
+      franka_example_controllers/CartesianImpedanceExampleController modified for TFPolicy execution.
+    </description>
+  </class>
+</library>

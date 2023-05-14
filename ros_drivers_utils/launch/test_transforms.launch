@@ -1,0 +1,21 @@
+<launch>
+  <include file="$(find franka_control)/launch/franka_control.launch" >
+    <arg name="robot_ip" value="franka_robot" />
+    <arg name="load_gripper" value="false" />
+  </include>
+  
+  <include file="$(find realsense2_camera)/launch/rs_camera.launch"/>
+  <include file="$(find softgrasp_ros_controllers)/launch/static_poses.launch">
+    <arg name="n" value="1_1"/>
+  </include>
+  
+  <group ns="camera/color">
+    <node name="test_transforms" pkg="softgrasp_ros" type="test_transforms" required="true" output="screen">
+      <remap from="image" to="image_rect_color"/>
+    </node>
+    <node name="image_proc" pkg="image_proc" type="image_proc" required="true" output="screen"/>
+    <node name="image_view" pkg="image_view" type="image_view" required="true" output="screen">
+      <remap from="image" to="image_marker_pose"/>
+    </node>
+  </group>
+</launch>

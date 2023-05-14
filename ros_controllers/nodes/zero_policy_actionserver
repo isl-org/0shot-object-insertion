@@ -1,0 +1,6 @@
+#!/usr/bin/env python3
+from zero_policy import ZeroPolicyActionServer
+
+if __name__ == '__main__':
+  pas = ZeroPolicyActionServer()
+  pas.run()

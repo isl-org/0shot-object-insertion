@@ -1,0 +1,24 @@
+<launch>
+  <arg name="robot_ip" default="franka_robot"/>
+  <arg name="load_gripper" default="false"/>
+  <arg name="debug_mode" default="false"/>
+  <arg name="slot_trial_idxs"/>
+  
+  <include file="$(find panda_moveit_config)/launch/panda_control_moveit_rviz.launch">
+    <arg name="robot_ip" value="$(arg robot_ip)"/>
+    <arg name="load_gripper" value="$(arg load_gripper)"/>
+    <arg name="launch_rviz" value="false"/>
+  </include>
+  
+  <include file="$(find softgrasp_ros_controllers)/launch/static_poses.launch">
+    <arg name="n" value="$(arg slot_trial_idxs)"/>
+  </include>
+  
+  <node name="grasp_plate" pkg="softgrasp_ros" type="grasp_plate.py" output="screen" unless="$(arg debug_mode)">
+    <param name="ready_y_offset" value="0.3"/>
+  </node>
+  
+  <node name="$(anon rviz)" pkg="rviz" type="rviz" respawn="false" output="screen" required="true" args="-d $(find softgrasp_ros)/rviz/moveit.rviz">
+    <rosparam command="load" file="$(find panda_moveit_config)/config/kinematics.yaml"/>
+  </node>
+</launch>

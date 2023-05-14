@@ -1,0 +1,7 @@
+<launch>
+  <arg name="bag_filename"/>
+
+  <param name="use_sim_time" value="true"/>
+  <node name="play_bag" pkg="rosbag" type="play" output="screen" args="--clock -d 0.5 -k $(arg bag_filename)"/>
+  <node name="circle_sanity_check" pkg="softgrasp_ros_controllers" type="circle_sanity_check" required="true" output="screen" />
+</launch>

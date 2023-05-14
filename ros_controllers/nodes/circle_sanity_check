@@ -1,0 +1,79 @@
+#!/usr/bin/env python
+import rospy
+from fit_circle import fit_circle_3d
+import tf2_ros
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from transform_utils import quat2axangle
+
+if __name__ == '__main__':
+  rospy.init_node('circle_sanity_check')
+
+  tfBuffer = tf2_ros.Buffer()
+  listener = tf2_ros.TransformListener(tfBuffer)
+  rospy.sleep(rospy.Duration(0.1))
+
+  bTe_pos = []
+  bTe_quat = []
+  rate = rospy.Rate(10.0)
+  while not rospy.is_shutdown():
+    try:
+      trans = tfBuffer.lookup_transform('panda_link8', 'panda_link0', rospy.Time.now(), rospy.Duration(1.0))
+    except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException) as e:
+      rospy.logwarn(e)
+      break
+
+    bTe_pos.append([
+      trans.transform.translation.x,
+      trans.transform.translation.y,
+      trans.transform.translation.z,
+    ])
+    bTe_quat.append([
+      trans.transform.rotation.x,
+      trans.transform.rotation.y,
+      trans.transform.rotation.z,
+      trans.transform.rotation.w,
+    ])
+    rate.sleep()
+
+  rospy.loginfo("Got {:d} frames".format(len(bTe_pos)))
+  bTe_pos = np.array(bTe_pos)
+  bTe_quat = np.array(bTe_quat)
+  bTe_aa = np.vstack([np.rad2deg(quat2axangle(q)) for q in bTe_quat])
+  circle = fit_circle_3d(bTe_pos)
+  rospy.loginfo("Circle center = ({:.3f}, {:.3f}, {:.3f})".format(*circle[0]))
+  rospy.loginfo("Circle normal = ({:.3f}, {:.3f}, {:.3f})".format(*circle[2]))
+  rospy.loginfo("Circle radius = {:.3f}".format(circle[1]))
+
+  min_pos = np.min(bTe_pos[:, :3], axis=0)
+  max_pos = np.max(bTe_pos[:, :3], axis=0)
+  xy_range = max(max_pos[0]-min_pos[0], max_pos[1]-min_pos[1])
+  x_center = 0.5 * (min_pos[0] + max_pos[0])
+  y_center = 0.5 * (min_pos[1] + max_pos[1])
+  
+  fig = plt.figure()
+  ax = fig.add_subplot(111, projection='3d')
+  ax.scatter(bTe_pos[:, 0], bTe_pos[:, 1], bTe_pos[:, 2], depthshade=False)
+  ax.set_xlabel('X')
+  ax.set_ylabel('Y')
+  ax.set_zlabel('Z')
+  ax.set_xlim(x_center-0.5*xy_range, x_center+0.5*xy_range)
+  ax.set_ylim(y_center-0.5*xy_range, y_center+0.5*xy_range)
+  ax.set_zlim(0.0, max_pos[2] + 0.02)
+
+
+  fig = plt.figure()
+  ax = fig.add_subplot(311)
+  ax.plot(bTe_aa[:, 0])
+  ax.set_ylim(-180.0, 180.0)
+  ax.set_ylabel('X (deg)')
+  ax = fig.add_subplot(312)
+  ax.plot(bTe_aa[:, 1])
+  ax.set_ylim(-180.0, 180.0)
+  ax.set_ylabel('Y (deg)')
+  ax = fig.add_subplot(313)
+  ax.plot(bTe_aa[:, 2])
+  ax.set_ylim(-180.0, 180.0)
+  ax.set_ylabel('Z (deg)')
+  plt.show()
