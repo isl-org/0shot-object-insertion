@@ -1,0 +1,77 @@
+{
+    "horizon": 128,
+    "history_length": 8,
+    "include_actions_in_history": false,
+    "pos_tolerance": 0.005,
+    "rot_tolerance_deg": 1.0,
+    "max_pos_action": 0.5,
+    "max_rot_action_deg": 45.0,
+    "time_scale": 1.0,
+    "decision_step": 50,
+    "base_weight": 0.5,
+    "residual_weight": 0.5,
+    "acquire_grasp_tries": 100,
+    "success_pos_thresh": 0.02,
+    "success_rot_thresh_deg": 10.0,
+    "drop_penalty": 1.1,
+    "goalreach_reward": 0.5, 
+    "use_ft_penalty": false,
+    "use_goaldist_penalty": true,
+    "use_time_penalty": true,
+    "use_action_delta_penalty": true,
+    "force_penalty_cutoff": 10.0,
+    "force_penalty_slope": 0.5,
+    "torque_penalty_cutoff": 0.75,
+    "torque_penalty_slope": 5.0,
+    "goaldist_pos_penalty_cutoff": 0.5,
+    "goaldist_rot_penalty_cutoff_deg": 30.0,
+    "randomize_eef_location": false,
+    "randomize_goal_location": true,
+    "noisy_eef": false,
+    "num_slots": 3,
+    "slot_height": 0.16,
+    "slot_block_width": 0.06,
+    "slot_gap": 0.1,
+    "drop_steps": 5,
+    "eef_pos_offset_range": [
+        [[-0.1, -0.1, 0.0], [0.1, 0.1, 0.2]],
+        [[-0.1, -0.01, 0.0], [0.1, 0.01, 0.2]],
+        [[-0.1, -0.1, 0.0], [0.1, 0.1, 0.2]]
+    ],
+    "eef_rot_deg_offset_range": [
+        [[0.0, 0.0, -20.0], [0.0, 0.0, 20.0]],
+        [[0.0, 0.0, -5.0], [0.0, 0.0, 5.0]],
+        [[0.0, 0.0, -20.0], [0.0, 0.0, 20.0]]
+    ],
+    "slot_pos_range": [
+        [[-0.2, -0.2, 0.0],   [-0.1, 0.2, 0.0]],
+        [[-0.2, -0.035, 0.0], [-0.1, 0.035, 0.0]],
+        [[-0.2, -0.035, 0.0], [-0.1, 0.035, 0.0]]
+    ],
+    "slot_rot_range_deg": [
+        [-20.0, 20.0],
+        [-13.0, 13.0],
+        [-13.0, 13.0]
+    ],
+    "slot_pos_noise_range": [
+      [-0.05, -0.05, 0.0], [0.05, 0.05, 0.0]
+    ],
+    "slot_rot_noise_range_deg": [-5.0, 5.0],
+    "eef_pos_noise_range": [
+      [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]
+    ],
+    "eef_rot_noise_range_deg": [
+      [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]
+    ],
+    "curriculum": {
+      "noise_level": {
+        "iters": [0, 20000, 30000, 40000, 50000],
+        "range": [0.0, 1.0]
+      },
+      "goalreach_steps": {
+        "iters": [50000, 60000, 70000, 90000, 120000],
+        "range": [1, 10]
+      }
+    },
+    "policy_lag_range": [7, 13]
+}
