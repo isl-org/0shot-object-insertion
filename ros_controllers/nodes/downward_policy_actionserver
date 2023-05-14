@@ -1,0 +1,6 @@
+#!/usr/bin/env python3
+from downward_policy import DownwardPolicyActionServer
+
+if __name__ == '__main__':
+  pas = DownwardPolicyActionServer()
+  pas.run()

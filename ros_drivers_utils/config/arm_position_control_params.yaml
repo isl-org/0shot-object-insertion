@@ -1,0 +1,3 @@
+position_control:
+  gripper_length: 0.15
+  gripper_z_angle: 30.0

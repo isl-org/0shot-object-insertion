@@ -1,0 +1,18 @@
+name: sac_utils
+
+dependencies:
+  - python=3.9
+  - pip
+  - pip:
+    - autopep8
+    - imageio[ffmpeg]
+    - ipython
+    - matplotlib
+    - numba>=0.49.1
+    - scipy>=1.2.3
+    - tensorflow==2.6.0
+    - tensorflow-probability==0.14
+    - keras==2.6
+    - tf-agents[reverb]==0.10.0
+    - gym==0.23.0
+    - pybullet==3.2.5

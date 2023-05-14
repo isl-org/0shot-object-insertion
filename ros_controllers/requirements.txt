@@ -1,0 +1,12 @@
+numpy
+tensorflow == 2.7.0
+setuptools
+distlib
+tf-agents == 0.10.0
+rospkg
+catkin_pkg
+roslibpy
+ipython
+Pillow
+nbconvert
+autopep8

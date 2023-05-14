@@ -1,0 +1,189 @@
+<?xml version="1.0" ?>
+<mujoco model="mgtest">
+   <compiler inertiafromgeom="auto" angle="radian"/>
+   <option timestep="0.001"/>
+   <visual>
+      <map fogstart="3" fogend="5" force="0.1" znear="0.1"/>
+      <quality shadowsize="2048"/>
+      <global offwidth="800" offheight="800"/>
+   </visual>
+   <asset>
+      <texture name="texgeom" type="cube" builtin="flat" mark="cross" width="127" height="1278" rgb1="0.8 0.6 0.4" rgb2="0.8 0.6 0.4" markrgb="1 1 1" random="0.01"/>
+      <material name="geom" texture="texgeom" texuniform="true"/>
+   </asset>
+   <worldbody>
+      <light directional="true" diffuse=".8 .8 .8" specular="0.3 0.3 0.3" pos="0 0 4.0" dir="0 -.15 -1"/>
+      <body name="body0" pos="0 0 0" euler="0 3.1415 0">
+         <geom size="0.044 0.044 0.005" type="box" contype="1" conaffinity="3" condim="4"/>
+         <site pos="0 0 0" name="ft_frame" size="0.01 0.01 0.01" rgba="1 0 0 1" type="sphere" group="1"/>
+         <site pos="0 0 0.097" name="grip_site" size="0.01 0.01 0.01" rgba="1 0 0 0.5" type="sphere" group="1"/>
+         <site pos="0 0 0" name="grip_site_cylinder" size="0.005 10" rgba="1 0 0 0.3" type="cylinder" group="1"/>
+         <body name="body1" pos="0.044 0.044 -0.005">
+            <inertial pos="0.044 0.044 -0.005" mass="0.1" diaginertia="0.01 0.01 0.01"/>
+            <geom name="finger0_1" size="0.0125" type="capsule" density="1000.0" rgba="0 0 1 1" friction="4 0.005 0.0002" group="1" fromto="0.0 0.0 0.0 0.0 0.0 -0.017"/>
+            <joint name="joint_0_0" type="hinge" pos="0.044 0.044 0.0" axis="1 0 0" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+            <joint name="joint_1_1" type="hinge" pos="0.044 0.044 0.0" axis="0.0 0.2666840128117188 0.9637840200535798" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+            <joint name="joint_1_2" type="hinge" pos="0.044 0.044 0.0" axis="0.0 -0.9637840200535798 0.2666840128117188" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+            <body name="body2" pos="0.0 0.0 -0.017">
+               <inertial pos="0.0 0.0 -0.017" mass="0.1" diaginertia="0.01 0.01 0.01"/>
+               <geom name="finger0_2" size="0.0125" type="capsule" density="1000.0" rgba="0 0 1 1" friction="4 0.005 0.0002" group="1" fromto="0.0 0.0 -0.0 0.0 0.0 -0.017"/>
+               <joint name="joint_1_0" type="hinge" pos="0.0 0.0 -0.0" axis="1 0 0" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+               <joint name="joint_2_1" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 -0.1355205436591015 -0.9907745365350997" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+               <joint name="joint_2_2" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 0.9907745365350997 -0.1355205436591015" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+               <body name="body3" pos="0.0 0.0 -0.017">
+                  <inertial pos="0.0 0.0 -0.017" mass="0.1" diaginertia="0.01 0.01 0.01"/>
+                  <geom name="finger0_3" size="0.0125" type="capsule" density="1000.0" rgba="0 0 1 1" friction="4 0.005 0.0002" group="1" fromto="0.0 0.0 -0.0 0.0 0.0 -0.017"/>
+                  <joint name="joint_2_0" type="hinge" pos="0.0 0.0 -0.0" axis="1 0 0" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                  <joint name="joint_3_1" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 0.5514491728740724 0.8342084929659379" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                  <joint name="joint_3_2" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 -0.8342084929659379 0.5514491728740724" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                  <body name="body4" pos="0.0 0.0 -0.017">
+                     <inertial pos="0.0 0.0 -0.017" mass="0.1" diaginertia="0.01 0.01 0.01"/>
+                     <geom name="finger0_4" size="0.0125" type="capsule" density="1000.0" rgba="0 0 1 1" friction="4 0.005 0.0002" group="1" fromto="0.0 0.0 -0.0 0.0 0.0 -0.017"/>
+                     <joint name="joint_3_0" type="hinge" pos="0.0 0.0 -0.0" axis="1 0 0" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                     <joint name="joint_4_1" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 -0.4134496815716305 -0.9105269687430007" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                     <joint name="joint_4_2" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 0.9105269687430007 -0.4134496815716305" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                     <body name="body5" pos="0.0 0.0 -0.017">
+                        <inertial pos="0.0 0.0 -0.017" mass="0.1" diaginertia="0.01 0.01 0.01"/>
+                        <geom name="finger0_5" size="0.0125" type="capsule" density="1000.0" rgba="0 0 1 1" friction="4 0.005 0.0002" group="1" fromto="0.0 0.0 -0.0 0.0 0.0 -0.017"/>
+                        <joint name="joint_4_0" type="hinge" pos="0.0 0.0 -0.0" axis="1 0 0" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                        <joint name="joint_5_1" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 -0.100261801372647 0.994961090287209" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                        <joint name="joint_5_2" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 -0.994961090287209 -0.100261801372647" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                     </body>
+                  </body>
+               </body>
+            </body>
+         </body>
+         <body name="body6" pos="0.044 -0.044 -0.005">
+            <inertial pos="0.044 -0.044 -0.005" mass="0.1" diaginertia="0.01 0.01 0.01"/>
+            <geom name="finger1_0" size="0.0125" type="capsule" density="1000.0" rgba="0 0 1 1" friction="4 0.005 0.0002" group="1" fromto="0.0 -0.0 0.0 0.0 0.0 -0.017"/>
+            <joint name="joint_5_0" type="hinge" pos="0.044 -0.044 0.0" axis="-1 0 0" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+            <joint name="joint_6_1" type="hinge" pos="0.044 -0.044 0.0" axis="0.0 -0.2624792824472494 0.9649376281843178" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+            <joint name="joint_6_2" type="hinge" pos="0.044 -0.044 0.0" axis="0.0 0.9649376281843178 0.2624792824472494" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+            <body name="body7" pos="0.0 0.0 -0.017">
+               <inertial pos="0.0 0.0 -0.017" mass="0.1" diaginertia="0.01 0.01 0.01"/>
+               <geom name="finger1_1" size="0.0125" type="capsule" density="1000.0" rgba="0 0 1 1" friction="4 0.005 0.0002" group="1" fromto="0.0 0.0 -0.0 0.0 0.0 -0.017"/>
+               <joint name="joint_6_0" type="hinge" pos="0.0 0.0 -0.0" axis="-1 0 0" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+               <joint name="joint_7_1" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 -0.6328168097950548 -0.774301546712138" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+               <joint name="joint_7_2" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 -0.774301546712138 0.6328168097950548" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+               <body name="body8" pos="0.0 0.0 -0.017">
+                  <inertial pos="0.0 0.0 -0.017" mass="0.1" diaginertia="0.01 0.01 0.01"/>
+                  <geom name="finger1_2" size="0.0125" type="capsule" density="1000.0" rgba="0 0 1 1" friction="4 0.005 0.0002" group="1" fromto="0.0 0.0 -0.0 0.0 0.0 -0.017"/>
+                  <joint name="joint_7_0" type="hinge" pos="0.0 0.0 -0.0" axis="-1 0 0" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                  <joint name="joint_8_1" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 0.2273141069556877 -0.9738214912287253" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                  <joint name="joint_8_2" type="hinge" pos="0.0 0.0 -0.0" axis="-0.0 -0.9738214912287253 -0.2273141069556877" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                  <body name="body9" pos="0.0 0.0 -0.017">
+                     <inertial pos="0.0 0.0 -0.017" mass="0.1" diaginertia="0.01 0.01 0.01"/>
+                     <geom name="finger1_3" size="0.0125" type="capsule" density="1000.0" rgba="0 0 1 1" friction="4 0.005 0.0002" group="1" fromto="0.0 0.0 -0.0 0.0 0.0 -0.017"/>
+                     <joint name="joint_8_0" type="hinge" pos="0.0 0.0 -0.0" axis="-1 0 0" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                     <joint name="joint_9_1" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 -0.9560864277500594 -0.29308487281354295" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                     <joint name="joint_9_2" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 -0.29308487281354295 0.9560864277500594" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                     <body name="body10" pos="0.0 0.0 -0.017">
+                        <inertial pos="0.0 0.0 -0.017" mass="0.1" diaginertia="0.01 0.01 0.01"/>
+                        <geom name="finger1_4" size="0.0125" type="capsule" density="1000.0" rgba="0 0 1 1" friction="4 0.005 0.0002" group="1" fromto="0.0 0.0 -0.0 0.0 0.0 -0.017"/>
+                        <joint name="joint_9_0" type="hinge" pos="0.0 0.0 -0.0" axis="-1 0 0" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                        <joint name="joint_10_1" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 0.8708376671266949 -0.4915707044905503" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                        <joint name="joint_10_2" type="hinge" pos="0.0 0.0 -0.0" axis="-0.0 -0.4915707044905503 -0.8708376671266949" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                     </body>
+                  </body>
+               </body>
+            </body>
+         </body>
+         <body name="body11" pos="-0.044 0.044 -0.005">
+            <inertial pos="-0.044 0.044 -0.005" mass="0.1" diaginertia="0.01 0.01 0.01"/>
+            <geom name="finger1_5" size="0.0125" type="capsule" density="1000.0" rgba="0 0 1 1" friction="4 0.005 0.0002" group="1" fromto="-0.0 0.0 0.0 0.0 0.0 -0.017"/>
+            <joint name="joint_10_0" type="hinge" pos="-0.044 0.044 0.0" axis="1 0 0" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+            <joint name="joint_11_1" type="hinge" pos="-0.044 0.044 0.0" axis="0.0 -0.6192651039829784 0.7851819731686094" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+            <joint name="joint_11_2" type="hinge" pos="-0.044 0.044 0.0" axis="0.0 -0.7851819731686094 -0.6192651039829784" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+            <body name="body12" pos="0.0 0.0 -0.017">
+               <inertial pos="0.0 0.0 -0.017" mass="0.1" diaginertia="0.01 0.01 0.01"/>
+               <geom name="finger2_0" size="0.0125" type="capsule" density="1000.0" rgba="0 0 1 1" friction="4 0.005 0.0002" group="1" fromto="0.0 0.0 -0.0 0.0 0.0 -0.017"/>
+               <joint name="joint_11_0" type="hinge" pos="0.0 0.0 -0.0" axis="1 0 0" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+               <joint name="joint_12_1" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 0.8900027341641112 0.4559551876888849" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+               <joint name="joint_12_2" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 -0.4559551876888849 0.8900027341641112" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+               <body name="body13" pos="0.0 0.0 -0.017">
+                  <inertial pos="0.0 0.0 -0.017" mass="0.1" diaginertia="0.01 0.01 0.01"/>
+                  <geom name="finger2_1" size="0.0125" type="capsule" density="1000.0" rgba="0 0 1 1" friction="4 0.005 0.0002" group="1" fromto="0.0 0.0 -0.0 0.0 0.0 -0.017"/>
+                  <joint name="joint_12_0" type="hinge" pos="0.0 0.0 -0.0" axis="1 0 0" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                  <joint name="joint_13_1" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 0.8919528358230068 -0.45212845372448773" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                  <joint name="joint_13_2" type="hinge" pos="0.0 0.0 -0.0" axis="-0.0 0.45212845372448773 0.8919528358230068" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                  <body name="body14" pos="0.0 0.0 -0.017">
+                     <inertial pos="0.0 0.0 -0.017" mass="0.1" diaginertia="0.01 0.01 0.01"/>
+                     <geom name="finger2_2" size="0.0125" type="capsule" density="1000.0" rgba="0 0 1 1" friction="4 0.005 0.0002" group="1" fromto="0.0 0.0 -0.0 0.0 0.0 -0.017"/>
+                     <joint name="joint_13_0" type="hinge" pos="0.0 0.0 -0.0" axis="1 0 0" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                     <joint name="joint_14_1" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 0.35811569009695643 -0.9336772207280098" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                     <joint name="joint_14_2" type="hinge" pos="0.0 0.0 -0.0" axis="-0.0 0.9336772207280098 0.35811569009695643" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                     <body name="body15" pos="0.0 0.0 -0.017">
+                        <inertial pos="0.0 0.0 -0.017" mass="0.1" diaginertia="0.01 0.01 0.01"/>
+                        <geom name="finger2_3" size="0.0125" type="capsule" density="1000.0" rgba="0 0 1 1" friction="4 0.005 0.0002" group="1" fromto="0.0 0.0 -0.0 0.0 0.0 -0.017"/>
+                        <joint name="joint_14_0" type="hinge" pos="0.0 0.0 -0.0" axis="1 0 0" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                        <joint name="joint_15_1" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 -0.22766179900639003 -0.9737402658169035" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                        <joint name="joint_15_2" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 0.9737402658169035 -0.22766179900639003" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                     </body>
+                  </body>
+               </body>
+            </body>
+         </body>
+         <body name="body16" pos="-0.044 -0.044 -0.005">
+            <inertial pos="-0.044 -0.044 -0.005" mass="0.1" diaginertia="0.01 0.01 0.01"/>
+            <geom name="finger2_4" size="0.0125" type="capsule" density="1000.0" rgba="0 0 1 1" friction="4 0.005 0.0002" group="1" fromto="-0.0 -0.0 0.0 0.0 0.0 -0.017"/>
+            <joint name="joint_15_0" type="hinge" pos="-0.044 -0.044 0.0" axis="-1 0 0" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+            <joint name="joint_16_1" type="hinge" pos="-0.044 -0.044 0.0" axis="0.0 -0.9841722851104546 -0.17721431437800403" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+            <joint name="joint_16_2" type="hinge" pos="-0.044 -0.044 0.0" axis="0.0 -0.17721431437800403 0.9841722851104546" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+            <body name="body17" pos="0.0 0.0 -0.017">
+               <inertial pos="0.0 0.0 -0.017" mass="0.1" diaginertia="0.01 0.01 0.01"/>
+               <geom name="finger2_5" size="0.0125" type="capsule" density="1000.0" rgba="0 0 1 1" friction="4 0.005 0.0002" group="1" fromto="0.0 0.0 -0.0 0.0 0.0 -0.017"/>
+               <joint name="joint_16_0" type="hinge" pos="0.0 0.0 -0.0" axis="-1 0 0" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+               <joint name="joint_17_1" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 0.4195832047002552 0.9077168800531715" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+               <joint name="joint_17_2" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 0.9077168800531715 -0.4195832047002552" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+               <body name="body18" pos="0.0 0.0 -0.017">
+                  <inertial pos="0.0 0.0 -0.017" mass="0.1" diaginertia="0.01 0.01 0.01"/>
+                  <geom name="finger3_0" size="0.0125" type="capsule" density="1000.0" rgba="0 0 1 1" friction="4 0.005 0.0002" group="1" fromto="0.0 0.0 -0.0 0.0 0.0 -0.017"/>
+                  <joint name="joint_17_0" type="hinge" pos="0.0 0.0 -0.0" axis="-1 0 0" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                  <joint name="joint_18_1" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 0.37391291873777444 0.9274638155750329" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                  <joint name="joint_18_2" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 0.9274638155750329 -0.37391291873777444" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                  <body name="body19" pos="0.0 0.0 -0.017">
+                     <inertial pos="0.0 0.0 -0.017" mass="0.1" diaginertia="0.01 0.01 0.01"/>
+                     <geom name="finger3_1" size="0.0125" type="capsule" density="1000.0" rgba="0 0 1 1" friction="4 0.005 0.0002" group="1" fromto="0.0 0.0 -0.0 0.0 0.0 -0.017"/>
+                     <joint name="joint_18_0" type="hinge" pos="0.0 0.0 -0.0" axis="-1 0 0" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                     <joint name="joint_19_1" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 0.6753447289730936 0.7375022013853644" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                     <joint name="joint_19_2" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 0.7375022013853644 -0.6753447289730936" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                     <body name="body20" pos="0.0 0.0 -0.017">
+                        <inertial pos="0.0 0.0 -0.017" mass="0.1" diaginertia="0.01 0.01 0.01"/>
+                        <geom name="finger3_2" size="0.0125" type="capsule" density="1000.0" rgba="0 0 1 1" friction="4 0.005 0.0002" group="1" fromto="0.0 0.0 -0.0 0.0 0.0 -0.017"/>
+                        <joint name="joint_19_0" type="hinge" pos="0.0 0.0 -0.0" axis="-1 0 0" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                        <joint name="joint_20_1" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 -0.8626394645922251 0.5058192899920279" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                        <joint name="joint_20_2" type="hinge" pos="0.0 0.0 -0.0" axis="0.0 0.5058192899920279 0.8626394645922251" damping="0.01" limited="true" range="-0.3 0.3" stiffness="10.0"/>
+                     </body>
+                  </body>
+               </body>
+            </body>
+         </body>
+      </body>
+   </worldbody>
+   <actuator>
+      <motor name="joint_0_0_motor" gear="1.0" joint="joint_0_0" ctrllimited="true" ctrlrange="-1.0 1.0"/>
+      <motor name="joint_1_0_motor" gear="1.0" joint="joint_1_0" ctrllimited="true" ctrlrange="-1.0 1.0"/>
+      <motor name="joint_2_0_motor" gear="1.0" joint="joint_2_0" ctrllimited="true" ctrlrange="-1.0 1.0"/>
+      <motor name="joint_3_0_motor" gear="1.0" joint="joint_3_0" ctrllimited="true" ctrlrange="-1.0 1.0"/>
+      <motor name="joint_4_0_motor" gear="1.0" joint="joint_4_0" ctrllimited="true" ctrlrange="-1.0 1.0"/>
+      <motor name="joint_5_0_motor" gear="1.0" joint="joint_5_0" ctrllimited="true" ctrlrange="-1.0 1.0"/>
+      <motor name="joint_6_0_motor" gear="1.0" joint="joint_6_0" ctrllimited="true" ctrlrange="-1.0 1.0"/>
+      <motor name="joint_7_0_motor" gear="1.0" joint="joint_7_0" ctrllimited="true" ctrlrange="-1.0 1.0"/>
+      <motor name="joint_8_0_motor" gear="1.0" joint="joint_8_0" ctrllimited="true" ctrlrange="-1.0 1.0"/>
+      <motor name="joint_9_0_motor" gear="1.0" joint="joint_9_0" ctrllimited="true" ctrlrange="-1.0 1.0"/>
+      <motor name="joint_10_0_motor" gear="1.0" joint="joint_10_0" ctrllimited="true" ctrlrange="-1.0 1.0"/>
+      <motor name="joint_11_0_motor" gear="1.0" joint="joint_11_0" ctrllimited="true" ctrlrange="-1.0 1.0"/>
+      <motor name="joint_12_0_motor" gear="1.0" joint="joint_12_0" ctrllimited="true" ctrlrange="-1.0 1.0"/>
+      <motor name="joint_13_0_motor" gear="1.0" joint="joint_13_0" ctrllimited="true" ctrlrange="-1.0 1.0"/>
+      <motor name="joint_14_0_motor" gear="1.0" joint="joint_14_0" ctrllimited="true" ctrlrange="-1.0 1.0"/>
+      <motor name="joint_15_0_motor" gear="1.0" joint="joint_15_0" ctrllimited="true" ctrlrange="-1.0 1.0"/>
+      <motor name="joint_16_0_motor" gear="1.0" joint="joint_16_0" ctrllimited="true" ctrlrange="-1.0 1.0"/>
+      <motor name="joint_17_0_motor" gear="1.0" joint="joint_17_0" ctrllimited="true" ctrlrange="-1.0 1.0"/>
+      <motor name="joint_18_0_motor" gear="1.0" joint="joint_18_0" ctrllimited="true" ctrlrange="-1.0 1.0"/>
+      <motor name="joint_19_0_motor" gear="1.0" joint="joint_19_0" ctrllimited="true" ctrlrange="-1.0 1.0"/>
+   </actuator>
+   <sensor>
+      <force name="force_ee" site="ft_frame"/>
+      <torque name="torque_ee" site="ft_frame"/>
+   </sensor>
+</mujoco>

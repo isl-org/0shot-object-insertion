@@ -1,0 +1,4 @@
+<launch>
+  <arg name="serial_port" default="/dev/ttyACM0"/>
+  <node name="hand_interface_node" type="serial_node.py" pkg="rosserial_python" output="screen" required="true" args="$(arg serial_port)"/>
+</launch>

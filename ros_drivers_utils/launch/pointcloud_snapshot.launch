@@ -1,0 +1,3 @@
+<launch>
+  <node name="pointcloud_snapshotter" type="pointcloud_snapshot" pkg="softgrasp_ros" output="screen" required="true"></node>
+</launch>

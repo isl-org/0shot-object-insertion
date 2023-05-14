@@ -1,0 +1,6 @@
+#!/usr/bin/env python3
+from random_search_policy import RandomSearchPolicyActionServer
+
+if __name__ == '__main__':
+  pas = RandomSearchPolicyActionServer()
+  pas.run()

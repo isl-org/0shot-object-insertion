@@ -1,0 +1,7 @@
+<launch>
+  <arg name="grip_strength" default="0.5"/>
+  <node name="test_hand_control" pkg="softgrasp_ros" type="test_hand_control" output="screen" required="true">
+    <param name="grip_strength" value="$(arg grip_strength)"/>
+  </node>
+  <include file="$(find softgrasp_ros)/launch/hand_control_interface.launch"/>
+</launch>

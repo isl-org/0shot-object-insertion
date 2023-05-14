@@ -1,0 +1,5 @@
+<launch>
+  <node name="perception_server" type="perception_server" pkg="softgrasp_ros" output="screen" required="true">
+    <param name="debug_mode" value="true"/>
+  </node>
+</launch>

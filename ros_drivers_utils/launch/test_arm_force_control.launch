@@ -1,0 +1,17 @@
+<launch>
+  <arg name="force_controller_name" default="downward_force_controller"/>
+  <arg name="force_control_desired_mass" default="0.8"/>
+  <arg name="force_control_kp" default="1.0"/>
+  <arg name="force_control_ki" default="2.0"/>
+  <arg name="force_control_kd" default="0.0"/>
+  
+  <include file="$(find softgrasp_ros)/launch/arm_force_control_interface.launch"/>
+  <node name="test_arm_force_control" pkg="softgrasp_ros" type="test_arm_force_control" output="screen">
+    <param name="force_control/controller_name" value="$(arg force_controller_name)"/>
+    <param name="force_control/desired_mass" value="$(arg force_control_desired_mass)"/>
+    <param name="force_control/kp" value="$(arg force_control_kp)"/>
+    <param name="force_control/ki" value="$(arg force_control_ki)"/>
+    <param name="force_control/kd" value="$(arg force_control_kd)"/>
+  </node>
+  <node name="rqt_console" type="rqt_console" pkg="rqt_console" output="screen" required="true"/>
+</launch>

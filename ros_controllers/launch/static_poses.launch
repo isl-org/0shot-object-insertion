@@ -1,0 +1,104 @@
+<launch>
+  <!-- slotidx<1|2|3|$|5|6>_trialidx<1|2|3|4> -->
+  <arg name="n"/>
+  <!-- The rpy in the comment uses the extrinsic XYZ convention, which is the same as is used in a URDF. See
+       http://wiki.ros.org/geometry2/RotationMethods and https://en.wikipedia.org/wiki/Euler_angles for more info. -->
+  <!-- xyz="-0.0120971 -0.379168 0.481674" rpy="2.96992 2.3232 -2.89396" -->
+  <!--node pkg="tf2_ros" type="static_transform_publisher" name="camera_link_broadcaster"
+      args="-0.0120971 -0.379168 0.481674   -0.0290941 0.403086 0.0790378 0.911278 panda_link0 camera_link" /-->
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTw"
+      args="-0.221842 0.242185 0.908658  0.859525 0.222863 -0.172776 0.42626 camera_color_optical_frame world_table" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="wTb"
+      args="0.615, 0.478, 0.041 3.101 0.001 0.003 world_table panda_link0" />
+  
+  <node pkg="tf2_ros" type="static_transform_publisher" name="bTgrasp"
+      args="0.628 -0.348 0.555  0.679 -0.054 0.086 0.727 panda_link0 grasp" />
+  
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '1_1')"
+      args="-0.319257 -0.16539 0.538993  -0.236304 -0.154369 -0.642346 0.712547 camera_color_optical_frame goal" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '1_2')"
+      args="-0.316778 -0.164274 0.537941  -0.291127 -0.0974699 -0.501485 0.808862 camera_color_optical_frame goal" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '1_3')"
+      args="-0.321863 -0.14913 0.532467  -0.227372 -0.116163 -0.657362 0.709002 camera_color_optical_frame goal" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '1_4')"
+      args="-0.302259 -0.158176 0.52105  -0.250562 -0.152106 -0.56047 0.774568 camera_color_optical_frame goal" />
+
+
+    
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '2_1')"
+      args="-0.281425 -0.153314 0.531108  -0.258776 -0.145837 -0.596419 0.745688 camera_color_optical_frame goal" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '2_2')"
+      args="-0.284657 -0.164065 0.527124  -0.254278 -0.16732 -0.639609 0.705866 camera_color_optical_frame goal" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '2_3')"
+      args="-0.276111 -0.166947 0.541161  -0.305353 -0.13226 -0.515067 0.789919 camera_color_optical_frame goal" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '2_4')"
+      args="-0.278944 -0.154313 0.525941  -0.233697 -0.144249 -0.540127 0.795513 camera_color_optical_frame goal" />
+
+
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '3_1')"
+      args="-0.240433 -0.14585 0.520486  -0.239758 -0.155627 -0.60756 0.741058 camera_color_optical_frame goal" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '3_2')"
+      args="-0.223141 -0.140785 0.513212  -0.256428 -0.159108 -0.605877 0.736099 camera_color_optical_frame goal" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '3_3')"
+      args="-0.253867 -0.145897 0.522638  -0.250731 -0.158232 -0.614251 0.731295 camera_color_optical_frame goal" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '3_4')"
+      args="-0.247274 -0.137026 0.510283  -0.235806 -0.1662 -0.648139 0.704762 camera_color_optical_frame goal" />
+
+
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '4_1')"
+      args="-0.204249 -0.137845 0.511598  -0.254149 -0.153158 -0.601232 0.741937 camera_color_optical_frame goal" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '4_2')"
+      args="-0.204393 -0.142068 0.512609  -0.301339 -0.161111 -0.591856 0.73003 camera_color_optical_frame goal" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '4_3')"
+      args="-0.193624 -0.133107 0.505541  -0.25888 -0.15644 -0.594593 0.744961 camera_color_optical_frame goal" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '4_4')"
+      args="-0.198344 -0.136642 0.500583  -0.272196 -0.148065 -0.524652 0.792923 camera_color_optical_frame goal" />
+
+
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '5_1')"
+      args="-0.180293 -0.13038 0.501998  -0.24688 -0.168099 -0.586254 0.75306 camera_color_optical_frame goal" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '5_2')"
+      args="-0.170494 -0.128369 0.49933  -0.272095 -0.170366 -0.587644 0.742707 camera_color_optical_frame goal" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '5_3')"
+      args="-0.171944 -0.137386 0.497265  -0.265238 -0.140648 -0.527271 0.794892 camera_color_optical_frame goal" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '5_4')"
+      args="-0.171757 -0.133908 0.494255  -0.251929 -0.178035 -0.618992 0.722277 camera_color_optical_frame goal" />
+
+
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '6_1')"
+      args="-0.124631 -0.119855 0.491375  -0.252607 -0.16161 -0.586491 0.752396 camera_color_optical_frame goal" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '6_2')"
+      args="-0.116349 -0.113872 0.48579  -0.243346 -0.175592 -0.593373 0.746899 camera_color_optical_frame goal" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '6_3')"
+      args="-0.135726 -0.118421 0.487451  -0.242951 -0.176681 -0.615707 0.728466 camera_color_optical_frame goal" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg" if="$(eval arg('n') == '6_4')"
+      args="-0.126958 -0.127035 0.480065  -0.256489 -0.168169 -0.57385 0.759361 camera_color_optical_frame goal" />
+
+  <!-- debug/-->
+  <!--node pkg="tf2_ros" type="static_transform_publisher" name="bTg"
+      args="0.364 -0.083 0.436 0.999 -0.030 0.034 -0.005 panda_link0 goal" /-->
+</launch>

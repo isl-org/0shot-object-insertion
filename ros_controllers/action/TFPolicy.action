@@ -1,0 +1,8 @@
+# goal
+softgrasp_ros_controllers/TFPolicyObservation observation
+---
+# result
+softgrasp_ros_controllers/TFPolicyAction1 action
+---
+# feedback
+float32 percent_complete

@@ -1,0 +1,16 @@
+<launch>
+  <arg name="robot_ip" default="franka_robot"/>
+  <arg name="load_gripper" default="false"/>
+  <arg name="debug_mode" default="false"/>
+  <arg name="n"/>
+  
+  <include file="$(find panda_moveit_config)/launch/panda_control_moveit_rviz.launch">
+    <arg name="robot_ip" value="$(arg robot_ip)"/>
+    <arg name="load_gripper" value="$(arg load_gripper)"/>
+    <arg name="launch_rviz" value="false"/>
+  </include>
+  
+  <node name="experiment" pkg="softgrasp_ros" type="move_to_start_pose.py" output="screen" required="true"
+    args="-n $(arg n) --poses_filename $(find softgrasp_ros)/nodes/start_poses.json"/>
+  
+</launch>

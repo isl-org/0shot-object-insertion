@@ -1,0 +1,53 @@
+<launch>
+  <arg name="arm_id" default="panda"/>
+  <arg name="robot_ip" default="franka_robot"/>
+  <arg name="load_gripper" default="false"/>
+  <arg name="policy_name"/>
+  <arg name="exp_name" default="exp_030"/>
+  <arg name="ckpt_dirname" default="policy_checkpoint_0034875000"/>
+  <arg name="vicinity_height_offset" default="0.15"/>
+
+  <rosparam file="$(find softgrasp_ros_controllers)/config/softgrasp_ros_controllers.yaml" subst_value="true"/>
+  
+  <include file="$(find panda_moveit_config)/launch/panda_control_moveit_rviz.launch">
+    <arg name="robot_ip" value="$(arg robot_ip)"/>
+    <arg name="load_gripper" value="$(arg load_gripper)"/>
+    <arg name="launch_rviz" value="false"/>
+  </include>
+
+  <include file="$(find softgrasp_ros_controllers)/launch/static_poses_peg_hole.launch"/>
+  
+  <node name="experiment_manager" pkg="softgrasp_ros" type="experiment_manager.py" output="screen" required="true"/>
+  
+  <node name="move_to_goal_vicinity" pkg="softgrasp_ros" type="move_to_goal_vicinity.py" output="screen">
+    <param name="height_offset" value="$(arg vicinity_height_offset)"/>
+    <param name="joint_mode" value="false"/>
+  </node>
+  
+  <node name="grasp_plate" pkg="softgrasp_ros" type="grasp_plate.py" output="screen">
+    <param name="ready_y_offset" value="0.3"/>
+    <param name="do_grasp" value="false"/>
+    <param name="joint_mode" value="false"/>
+  </node>
+  
+  <node name="raise_arm" pkg="softgrasp_ros" type="raise_arm.py" output="screen">
+    <param name="raise_amount" value="0.15"/>
+  </node>
+  
+  <!--node name="downward_controller_spawner" pkg="controller_manager" type="spawner"
+    args="stopped downward_force_controller" output="screen" required="true"/-->
+  <include file="$(find softgrasp_ros_controllers)/launch/policy_actionserver.launch" ns="tf_policy_controller">
+    <arg name="policy_name" value="$(arg policy_name)"/>
+    <arg name="exp_dir" value="$(find softgrasp_ros_controllers)/policies/$(arg exp_name)"/>
+    <arg name="ckpt_dirname" value="$(arg ckpt_dirname)"/>
+  </include>
+  <node name="tf_policy_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="--stopped tf_policy_controller"/>
+
+  <node name="$(anon rviz)" pkg="rviz" type="rviz" respawn="false" output="screen" required="true" args="-d $(find softgrasp_ros)/rviz/moveit.rviz">
+    <rosparam command="load" file="$(find panda_moveit_config)/config/kinematics.yaml"/>
+  </node>
+  <node name="rqt_controller_manager" pkg="rqt_controller_manager" type="rqt_controller_manager" output="screen"
+    required="true"/>
+  <node name="rqt_console" pkg="rqt_console" type="rqt_console" required="true"/>
+  <node name="rqt_reconfigure" pkg="rqt_reconfigure" type="rqt_reconfigure" required="false" />
+</launch>

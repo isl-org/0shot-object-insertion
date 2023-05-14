@@ -1,0 +1,24 @@
+<launch>
+  <!-- The rpy in the comment uses the extrinsic XYZ convention, which is the same as is used in a URDF. See
+       http://wiki.ros.org/geometry2/RotationMethods and https://en.wikipedia.org/wiki/Euler_angles for more info. -->
+  <!-- xyz="-0.0120971 -0.379168 0.481674" rpy="2.96992 2.3232 -2.89396" -->
+  <!--node pkg="tf2_ros" type="static_transform_publisher" name="camera_link_broadcaster"
+      args="-0.0120971 -0.379168 0.481674   -0.0290941 0.403086 0.0790378 0.911278 panda_link0 camera_link" /-->
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTw"
+      args="0.267787 -0.0264868 0.752239  0.547762 0.792814 -0.246687 0.102703 camera_color_optical_frame world_table" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="wTb"
+      args="0.461 -0.489 0.011 3.130 -0.000 0.017 world_table panda_link0" />
+  
+  <node pkg="tf2_ros" type="static_transform_publisher" name="bTgrasp"
+      args="0.628 -0.348 0.555  0.679 -0.054 0.086 0.727 panda_link0 grasp" />
+  
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="cTg"
+      args="-0.199834 -0.220402 0.763785  -0.241925 -0.110262 -0.546055 0.794442 camera_color_optical_frame goal" />
+
+  <!-- debug/-->
+  <!--node pkg="tf2_ros" type="static_transform_publisher" name="bTg"
+      args="0.364 -0.083 0.436 0.999 -0.030 0.034 -0.005 panda_link0 goal" /-->
+</launch>

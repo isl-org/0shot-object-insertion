@@ -1,0 +1,6 @@
+sensor_msgs/PointCloud2 pc
+---
+gpd_ros/GraspConfig grasp
+geometry_msgs/TransformStamped rTc
+std_msgs/Bool success
+std_msgs/String message

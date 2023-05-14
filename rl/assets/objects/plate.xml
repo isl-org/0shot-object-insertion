@@ -1,0 +1,16 @@
+<mujoco model="plate">
+  <asset>
+    <mesh file="meshes/plate.stl" name="plate_mesh"/>
+  </asset>
+  <worldbody>
+    <body>
+      <body name="object">
+        <geom mesh="plate_mesh" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="100" friction="0.95 0.3 0.1"  group="0" condim="4"/>
+        <!--geom mesh="plate_mesh" type="mesh" friction="1 0.005 0.0001" solimp="0.99 0.99 0.01" solref="0.02 1" density="100" group="0" condim="4" priority="1"/-->
+      </body>
+      <site rgba="0 0 0 0" size="0.005" pos="0 0 0" name="bottom_site"/>
+      <site rgba="0 0 0 0" size="0.005" pos="0 0 0.0275" name="top_site"/>
+      <site rgba="0 0 0 0" size="0.005" pos="0.1566 0 0" name="horizontal_radius_site"/>
+    </body>
+  </worldbody>
+</mujoco>
