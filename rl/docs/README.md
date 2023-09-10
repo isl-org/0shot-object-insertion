@@ -1,7 +1,7 @@
 # Reproduce ContactInsert
 
 ## Installation
-We use MuJoCo 2.0.0 for physics simulation. Follow these steps after following the general SAC Utilities [installation steps](documentation.md#installation):
+We use MuJoCo 2.0.0 for physics simulation. After following the general [SAC Utilities installation steps](documentation.md#installation), do the following:
 
 ### Common to both Linux and MacOS
 - Download [MuJoCo 2.0.0](https://roboti.us/download.html) in `~/.mujoco`. Make sure the dicrectory structure is `~/.mujoco/mujoco200_linux/{bin,doc,include,model,sample}`.
