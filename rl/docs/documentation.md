@@ -99,10 +99,7 @@ For example, running
 (sac_utils) $ python tfagents_system/run.py --params tfagents_system/minitaur_params.py --exp_dir logs/minitaur \
 --config config/minitaur.json --num_episodes 5 --checkpoint policy_checkpoint_0000500000 --seed 108
 ```
-
-produces a video like the following:
-
-https://user-images.githubusercontent.com/2848070/205775251-dc1909da-d73e-4b4f-bc4a-95c8265df648.mp4
+produces a [video](https://github.com/isl-org/0shot-object-insertion/assets/2848070/8722cc44-ecd6-4c78-a9d5-94637aa158e0) showing the execution of the policy.
 
 # Environment Parameters Curriculum
 Sometimes it is useful to vary environment parameters in a curriculum that depends on the iteration number. An
